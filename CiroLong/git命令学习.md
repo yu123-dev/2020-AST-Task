@@ -265,9 +265,9 @@ Fast-forward
 
 ## Switch
 
-我们注意到切换分支使用`git checkout <branch>`，而前面讲过的撤销修改则是`git checkout -- <file>`，同一个命令，有两种作用，确实有点令人迷惑。
+我们注意到切换分支使用`git checkout <branch>`，而前面讲过的撤销修改则是`git checkout -- <file>`，同一个命令，有两种作用
 
-实际上，切换分支这个动作，用`switch`更科学。因此，最新版本的Git提供了新的`git switch`命令来切换分支：
+切换分支这个动作，用`switch`更科学。因此，最新版本的Git提供了新的`git switch`命令来切换分支：
 
 创建并切换到新的`dev`分支，可以使用：
 
@@ -283,7 +283,7 @@ $ git switch master
 
 使用新的`git switch`命令，比`git checkout`要更容易理解。
 
-## 命令
+## 分支命令
 
 Git鼓励大量使用分支：
 
@@ -315,14 +315,14 @@ $ git log --graph --pretty=oneline --abbrev-commit
 
 ## Bug分支
 
-幸好，Git还提供了一个`stash`功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作：
+Git还提供了一个`stash`功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作：
 
 ```
 $ git stash
 Saved working directory and index state WIP on dev: f52c633 add merge
 ```
 
-现在，是时候接着回到`dev`分支干活了！
+回到`dev`分支
 
 ```
 $ git switch dev
@@ -333,7 +333,7 @@ On branch dev
 nothing to commit, working tree clean
 ```
 
-工作区是干净的，刚才的工作现场存到哪去了？用`git stash list`命令看看：
+`git stash list`命令查看：stash
 
 ```
 $ git stash list
@@ -346,24 +346,11 @@ stash@{0}: WIP on dev: f52c633 add merge
 
 ```
 $ git stash pop
-On branch dev
-Changes to be committed:
-  (use "git reset HEAD <file>..." to unstage)
-
-	new file:   hello.py
-
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
-	modified:   readme.txt
-
-Dropped refs/stash@{0} (5d677e2ee266f39ea296182fb2354265b91b3b2a)
 ```
 
 再用`git stash list`查看，就看不到任何stash内容了：
 
-你可以多次stash，恢复的时候，先用`git stash list`查看，然后恢复指定的stash，用命令：
+可以多次stash，恢复的时候，先用`git stash list`查看，然后恢复指定的stash，用命令：
 
 ```
 $ git stash apply stash@{0}
@@ -372,15 +359,8 @@ $ git stash apply stash@{0}
 为了方便操作，Git专门提供了一个`cherry-pick`命令，让我们能复制一个特定的提交到当前分支：
 
 ```
-$ git branch
-* dev
-  master
-$ git cherry-pick 4c805e2
-[master 1d4b803] fix bug 101
- 1 file changed, 1 insertion(+), 1 deletion(-)
+$ git cherry-pick <commit id>
 ```
-
-有些聪明的童鞋会想了，既然可以在master分支上修复bug后，在dev分支上可以“重放”这个修复过程，那么直接在dev分支上修复bug，然后在master分支上“重放”行不行？当然可以，不过你仍然需要`git stash`命令保存现场，才能从dev分支切换到master分支。
 
 # 标签
 
@@ -407,18 +387,16 @@ $ git cherry-pick 4c805e2
 git init     命令
 添加文件到Git仓库，分两步：
 1.使用命令
-git add <file>         ，注意，可反复多次使用，添加多个文件；
+git add <file>         添加到本地缓存区，可反复多次使用，添加多个文件；
 2.使用命令
-git commit -m <message>     ，完成。
+git commit -m <message>     提交。
 ```
-
-现在，运行`git status`命令看看结果：
 
 `git status`命令可以让我们时刻掌握仓库当前的状态
 
-虽然Git告诉我们`readme.txt`被修改了，但如果能看看具体修改了什么内容，自然是很好的。比如你休假两周从国外回来，第一天上班时，已经记不清上次怎么修改的`readme.txt`，所以，需要用`git diff`这个命令看看：
+`git diff`命令查看修改之后的不同
 
-版本控制系统肯定有某个命令可以告诉我们历史记录，在Git中，我们用`git log`命令查看：
+`git log`命令查看历史记录：
 
 如果嫌输出信息太多，看得眼花缭乱的，可以试试加上`--pretty=oneline`参数：
 
@@ -426,22 +404,20 @@ git commit -m <message>     ，完成。
 $ git log --pretty=oneline
 ```
 
-你看到的一大串类似`1094adb...`的是`commit id`（版本号）
+看到的一大串类似`1094adb...`的是`commit id`（版本号）
 
-现在，我们要把当前版本`append GPL`回退到上一个版本`add distributed`，就可以使用`git reset`命令：
+把当前版本回退到上一个版本，就可以使用`git reset`命令：
 
 ```
 $ git reset --hard HEAD^
 HEAD is now at e475afc add distributed
 ```
 
-Git提供了一个命令`git reflog`用来记录你的每一次命令：
+命令`git reflog`用来记录你的每一次命令：
 
 ```
 $ git reflog
 ```
-
-  
 
 
 
@@ -455,28 +431,11 @@ $ git remote add origin git@github.com:CiroLong/learngit.git
 
 `$ git push -u origin master`
 
-```
-$ git push -u origin master
-Counting objects: 20, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (15/15), done.
-Writing objects: 100% (20/20), 1.64 KiB | 560.00 KiB/s, done.
-Total 20 (delta 5), reused 0 (delta 0)
-remote: Resolving deltas: 100% (5/5), done.
-To github.com:michaelliao/learngit.git
- * [new branch]      master -> master
-Branch 'master' set up to track remote branch 'master' from 'origin'.
-```
+通过命令：`$ git push origin master`把本地`master`分支的最新修改推送至GitHub
 
-从现在起，只要本地作了提交，就可以通过命令：
+要使当前分支关联一个远程库，使用命令
 
-```
-$ git push origin master
-```
-
-把本地`master`分支的最新修改推送至GitHub，现在，你就拥有了真正的分布式版本库！
-
-要关联一个远程库，使用命令`git remote add origin git@server-name:path/repo-name.git`；
+`git remote add origin git@server-name:path/repo-name.git`
 
 关联后，使用命令`git push -u origin master`第一次推送master分支的所有内容；
 
