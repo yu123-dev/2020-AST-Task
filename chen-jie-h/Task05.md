@@ -1,4 +1,4 @@
-# Task05
+# 科协Task05
 
 结构体作业代码：
 
@@ -65,7 +65,7 @@ int main()
 
 
 
-简单了解main函数参数argc,argv:
+简单了解main函数参数argc,argv:(大概知道了其作用)
 
 argc:是指命令行输入参数的个数(以空格符分隔)
 
