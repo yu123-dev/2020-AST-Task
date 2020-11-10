@@ -77,7 +77,7 @@ e.g:   hello.exe ha hei
 
 
 
-Learn Git Flow:
+Learn to use Git Flow:
 
 1. Gitflow使用两个分支来记录项目开发的历史，而不是使用单一的master分支。在Gitflow流程中，master只是用于保存官方的发布历史，而develop分支才是用于集成各种功能开发的分支;
 
