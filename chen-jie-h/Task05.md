@@ -71,9 +71,9 @@ argc:是指命令行输入参数的个数(以空格符分隔)
 
 argv:存储了所有的命令行参数
 
-e.g:   hello.exe ha.exe hei.exe
+e.g:   hello.exe ha hei
 
-​		那么argc就是3，argv[0]就是"hello .exe"，argv[1]就是"ha.exe"，argv[2]就是"hei.exe"
+​		那么argc就是3，argv[0]就是"hello.exe"，argv[1]就是"ha"，argv[2]就是"hei"
 
 
 
@@ -111,7 +111,7 @@ Learn Git Flow:
 
    ​		与远程仓库同步：
 
-   ​		```git pull --rebase origin master```
+   ​		```git pull```
 
    
 
