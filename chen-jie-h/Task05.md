@@ -127,7 +127,7 @@ Learn Git Flow:
 
 ​		  3. 合并commit
 
-​		  4. 推送至远程仓库：
+​		  4. 推送到远程仓库：
 
 ​			`git push --force origin <branch's name>`
 
