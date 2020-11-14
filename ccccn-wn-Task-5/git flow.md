@@ -20,3 +20,6 @@ $ git pull origin next:master
 
 
 
+git remote add upstream 追踪主仓库
+
+git pull upstream main 本地仓库分支与远程仓库主仓库同步
